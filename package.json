@@ -1,15 +1,12 @@
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
 {
   "name": "jotish",
   "version": "1.0.0",
   "description": "This project is a 4-screen employee insights dashboard built with React. It was developed as a solution to an advanced front-end engineering assignment, with a heavy focus on performance, security, and a deep understanding of browser APIs and the React rendering lifecycle.",
   "main": "tailwind.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -27,5 +24,12 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "vite": "^8.0.0"
   }
 }
