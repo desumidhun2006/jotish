@@ -26,8 +26,21 @@ const EmployeeListPage = () => {
         
         const data = await response.json();
         
+        console.log("Raw API Response:", data);
+
         // Safely extract array data depending on how the backend structures the JSON response
-        const listData = Array.isArray(data) ? data : (data.data || []);
+        let listData = [];
+        if (data && data.TABLE_DATA && Array.isArray(data.TABLE_DATA.data)) {
+          // The API returns an array of arrays. We need to map it into an array of objects.
+          listData = data.TABLE_DATA.data.map(row => ({
+            name: row[0],
+            role: row[1],
+            city: row[2],
+            id: row[3],
+            startDate: row[4],
+            salary: row[5]
+          }));
+        }
         
         if (isMounted) {
           setEmployees(listData);
