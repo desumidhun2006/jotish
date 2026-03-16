@@ -58,7 +58,7 @@ const EmployeeListPage = () => {
     return () => { isMounted = false; };
   }, []);
 
-  const { scrollContainerRef, totalHeight, visibleItems } = useVirtualizer(
+  const { handleScroll, totalHeight, visibleItems } = useVirtualizer(
     employees,
     ITEM_HEIGHT,
     CONTAINER_HEIGHT
@@ -86,7 +86,7 @@ const EmployeeListPage = () => {
 
       {/* Virtualized Container */}
       <div 
-        ref={scrollContainerRef}
+        onScroll={handleScroll}
         className="relative overflow-y-auto bg-white border border-gray-200 shadow-sm rounded-b-lg scroll-smooth"
         style={{ height: `${CONTAINER_HEIGHT}px` }}
       >
