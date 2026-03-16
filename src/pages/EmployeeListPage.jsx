@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useVirtualizer } from '../hooks/useVirtualizer';
+import { useAuth } from '../providers/AuthProvider';
 
 const ITEM_HEIGHT = 64; // Fixed row height of 4rem (64px)
 const CONTAINER_HEIGHT = 600; // Scrollable area height
@@ -10,6 +11,7 @@ const EmployeeListPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
     let isMounted = true; // Prevent state updates if component unmounts mid-fetch
@@ -67,13 +69,26 @@ const EmployeeListPage = () => {
   if (isLoading) return <div className="flex items-center justify-center min-h-screen text-gray-600">Loading directory...</div>;
   if (error) return <div className="flex items-center justify-center min-h-screen text-red-600">Error: {error}</div>;
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div className="max-w-5xl px-4 py-12 mx-auto">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Employee Directory</h1>
-        <span className="px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">
-          {employees.length} Records Loaded
-        </span>
+        <div className="flex items-center gap-4">
+          <span className="px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">
+            {employees.length} Records Loaded
+          </span>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 text-sm font-medium text-gray-700 transition-colors bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-1"
+          >
+            Logout
+          </button>
+        </div>
       </div>
       
       {/* Virtualized Table Header */}
